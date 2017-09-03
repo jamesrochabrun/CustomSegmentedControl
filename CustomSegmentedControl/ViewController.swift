@@ -75,7 +75,37 @@ class ViewController: UIViewController {
             textSegmentedControl.titlesFont = UIFont(name: "OpenSans-Semibold", size: 14)
         }
     }
+    
+    @IBOutlet weak var linearThumbViewSegmentedControl: CustomSegmentedControl!
+    
+    @IBOutlet weak var regularSquareSegmentedControl: CustomSegmentedControl!
+    
 }
+
+class DummyDataSource {
+    
+    static func colorItems() -> [UIColor] {
+        return [#colorLiteral(red: 1, green: 0.5484918952, blue: 0, alpha: 1), #colorLiteral(red: 0.4117647059, green: 0.9411764706, blue: 0.6823529412, alpha: 1), #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)]
+    }
+    
+    static func iconItems() -> [UIImage] {
+        return  [#imageLiteral(resourceName: "home") , #imageLiteral(resourceName: "heart"), #imageLiteral(resourceName: "ink")]
+    }
+    
+    static func textItems() -> [String] {
+        return ["Open", "Close"]
+    }
+    
+    static func imageItems() -> [UIImage] {
+        return []
+    }
+}
+
+
+
+
+
+
 
 
 

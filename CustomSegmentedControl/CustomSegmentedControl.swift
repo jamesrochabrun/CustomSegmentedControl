@@ -257,7 +257,7 @@ class CustomSegmentedControl: UIControl {
         layer.cornerRadius = frame.height / 2
         self.backgroundColor = self.segmentedBackGroundColor
         self.layer.borderColor = self.segmentedBackGroundColor.cgColor
-        setSelector()
+        setThumbView()
         //if circleSelector is true the layout is not in stackview
         guard circleSelector else { return }
         for (index, btn) in self.buttons.enumerated() {
@@ -267,7 +267,7 @@ class CustomSegmentedControl: UIControl {
     
     //MARK: Helpers
     //set frame of selector
-    private func setSelector() {
+    private func setThumbView() {
         
         let selectorHeight = bounds.height - padding * 2
         let selectorWidth = circleSelector ? selectorHeight : (bounds.width / CGFloat(buttons.count)) - padding * 2
