@@ -19,24 +19,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    @IBOutlet weak var colorsSegmentedControl: CustomSegmentedControl! {
-        didSet {
-            let colors: [UIColor] = [#colorLiteral(red: 1, green: 0.5484918952, blue: 0, alpha: 1),  #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)]
-            colorsSegmentedControl.setSelectorWith(colors: colors)
-            colorsSegmentedControl.itemsWithDynamicColor = true
-            colorsSegmentedControl.fillEqually = false
-            colorsSegmentedControl.roundedControl = true
-          //  colorsSegmentedControl.segmentedBackGroundColor = .red
-            colorsSegmentedControl.imageForItemWithDynamicColors = UIImage(named: "vignette")
-            colorsSegmentedControl.setSelectorWith(colors: colors)
-            colorsSegmentedControl.padding = 2
-            colorsSegmentedControl.thumbViewColor = ViewController.thumbTintColor
-            colorsSegmentedControl.animationDuration = 0.1
-           // foilSegmentedControlViewModel = KMCustomSegmentedControlViewModel<FoilColor>(items: foilColors)
-        }
-    }
-
     
     @IBOutlet weak var dynamicImagesSegmentedControl: CustomSegmentedControl! {
         didSet {
@@ -45,9 +27,40 @@ class ViewController: UIViewController {
             dynamicImagesSegmentedControl.buttonsWithDynamicImages = true
             let images = [#imageLiteral(resourceName: "home") , #imageLiteral(resourceName: "heart")]
             dynamicImagesSegmentedControl.setSelectorWith(images: images)
-            dynamicImagesSegmentedControl.padding = 2
+            dynamicImagesSegmentedControl.padding = 0
             dynamicImagesSegmentedControl.thumbViewColor = ViewController.thumbTintColor
+            
+        }
+    }
+    
+    @IBOutlet weak var textSegmentedControl: CustomSegmentedControl! {
+        didSet {
+            textSegmentedControl.itemsWithText = true
+            textSegmentedControl.fillEqually = true
+            let strings = ["Classic Paper", "Luxe Paper"]
+            textSegmentedControl.setSelectorWith(titles: strings)
+            textSegmentedControl.padding = 2
+            textSegmentedControl.textColor = ViewController.uiTintColorForUnSelected
+            textSegmentedControl.selectedTextColor = ViewController.uiTintColorForSelected
+            textSegmentedControl.thumbViewColor = ViewController.thumbTintColor
+            textSegmentedControl.titlesFont = UIFont(name: "OpenSans-Semibold", size: 14)
+        }
+    }
 
+    @IBOutlet weak var colorsSegmentedControl: CustomSegmentedControl! {
+        didSet {
+            let colors: [UIColor] = [#colorLiteral(red: 1, green: 0.5484918952, blue: 0, alpha: 1),  #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)]
+            colorsSegmentedControl.setSelectorWith(colors: colors)
+            colorsSegmentedControl.itemsWithDynamicColor = true
+            colorsSegmentedControl.fillEqually = true
+            colorsSegmentedControl.roundedControl = true
+          //  colorsSegmentedControl.segmentedBackGroundColor = .red
+            colorsSegmentedControl.imageForItemWithDynamicColors = UIImage(named: "vignette")
+            colorsSegmentedControl.setSelectorWith(colors: colors)
+            colorsSegmentedControl.padding = 2
+            colorsSegmentedControl.thumbViewColor = ViewController.thumbTintColor
+            colorsSegmentedControl.animationDuration = 0.1
+           // foilSegmentedControlViewModel = KMCustomSegmentedControlViewModel<FoilColor>(items: foilColors)
         }
     }
     
@@ -64,17 +77,17 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var textSegmentedControl: CustomSegmentedControl! {
+    @IBOutlet weak var textSquareSegmentedControl: CustomSegmentedControl! {
         didSet {
-            textSegmentedControl.itemsWithText = true
-            textSegmentedControl.fillEqually = true
+            textSquareSegmentedControl.itemsWithText = true
+            textSquareSegmentedControl.fillEqually = true
             let strings = ["Classic Paper", "Luxe Paper"]
-            textSegmentedControl.setSelectorWith(titles: strings)
-            textSegmentedControl.padding = 2
-            textSegmentedControl.textColor = ViewController.uiTintColorForUnSelected
-            textSegmentedControl.selectedTextColor = ViewController.uiTintColorForSelected
-            textSegmentedControl.thumbViewColor = ViewController.thumbTintColor
-            textSegmentedControl.titlesFont = UIFont(name: "OpenSans-Semibold", size: 14)
+            textSquareSegmentedControl.setSelectorWith(titles: strings)
+            textSquareSegmentedControl.padding = 2
+            textSquareSegmentedControl.textColor = ViewController.uiTintColorForUnSelected
+            textSquareSegmentedControl.selectedTextColor = ViewController.uiTintColorForSelected
+            textSquareSegmentedControl.thumbViewColor = ViewController.thumbTintColor
+            textSquareSegmentedControl.titlesFont = UIFont(name: "OpenSans-Semibold", size: 14)
         }
     }
     

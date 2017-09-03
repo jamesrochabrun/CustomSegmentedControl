@@ -185,6 +185,7 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
+    
     //B) This makes changes on buttons with images and only if itemsWithText = false
     //if buttons have dynamicImages means if we want to show the image without changing its tintcolor
     //Setting this to true will make not buttonColorForNormal and buttonColorForSelected not been called
@@ -240,7 +241,48 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    //3 if fillEqualy = true
+    //3 all UI layout based on frames must be called on layoutSubviews
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = roundedControl ? frame.height / 2 : 1.0
+        self.backgroundColor = self.segmentedBackGroundColor
+        self.layer.borderColor = self.segmentedBackGroundColor.cgColor
+        setThumbView()
+        //if fillEqually is not true the layout is not in stackview and its set based on frames
+        guard !fillEqually else { return }
+        for (index, btn) in self.buttons.enumerated() {
+            btn.frame = setFrameForButtonAt(index: index)
+        }
+    }
+    
+    //MARK: THUMBVIEW LAYOUT
+//        private func setThumbView() {
+//    
+//            let thumbViewHeight = bounds.height - padding * 2
+//            let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : thumbViewHeight
+//            let thumbViewPositionX = padding
+//            let thumbViewPositionY = (bounds.height - thumbViewHeight) / 2
+//    
+//            thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
+//            thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
+//            thumbView.backgroundColor = thumbViewColor
+//        }
+    
+    private func setThumbView() {
+        
+        let thumbViewHeight: CGFloat = 5.0// bounds.height - padding * 2
+        let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
+        let thumbViewPositionX: CGFloat = 0//padding
+        let thumbViewPositionY = bounds.height - thumbViewHeight
+        
+        thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
+        thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
+        thumbView.backgroundColor = thumbViewColor
+    }
+    
+    //4 MARK: BUTTONS LAYOUTS
+    // if fillEqualy = true
     private func layoutButtonsOnStackView() {
         let sv = UIStackView(arrangedSubviews: buttons)
         sv.axis = .horizontal
@@ -264,65 +306,36 @@ class CustomSegmentedControl: UIControl {
         
         //1 identify the height of each button
         let buttonHeight = (bounds.height - padding * 2)
-        //2 set it's height for circle look and centered position Y
+        //2 set it's height for circle/square look and centered position Y
         let buttonWidth = buttonHeight
-        let selectorPositionY = (bounds.height - buttonHeight) / 2
+        let thumbViewPositionY = (bounds.height - buttonHeight) / 2
         
-        //3 get the delta for scaled buttons
-        let paddingForScale: CGFloat = (thumbView.frame.height - buttonHeight) / 2
+        //3 get the delta to align it in the center of the thumbViewArea
+        let paddingXForScale: CGFloat = (thumbView.frame.width - buttonWidth) / 2
         
         //set first and last elements origin x
-        let firstelementPositionX = self.padding + paddingForScale
-        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding + paddingForScale
+        let firstelementPositionX = self.padding + paddingXForScale
+        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding + paddingXForScale
         
-        //MARK Start here to modify the items from the second until the one befor the last
-        //the area where the selector is contained
-        let selectorAreaTotalWidth = bounds.width / CGFloat(buttons.count)
+        //MARK Start here to modify the items from the second until the one before the last
+        //the area where the thumbView is contained
+        let thumbViewAreaTotalWidth = bounds.width / CGFloat(buttons.count)
         //startingPoint based on x position multiplier
-        let startingPointAtIndex = selectorAreaTotalWidth *  CGFloat(index)
+        let startingPointAtIndex = thumbViewAreaTotalWidth *  CGFloat(index)
         //the remaining space of a selectorArea based on selector width
-        let originXForNextItem = (selectorAreaTotalWidth - thumbView.bounds.width) / 2
+        let originXForNextItem = (thumbViewAreaTotalWidth - thumbView.bounds.width) / 2
         //dynamically change the origin x of the items between 0 and lastItem
-        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem + paddingForScale
+        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem + paddingXForScale
         
         if index == 0 {
             
-            frame = CGRect(x: firstelementPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+            frame = CGRect(x: firstelementPositionX, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         } else if index == self.buttons.count - 1 {
-            frame = CGRect(x: lastElemetPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+            frame = CGRect(x: lastElemetPositionX, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         } else {
-            frame = CGRect(x: selectedStartPositionForCircleSelector, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+            frame = CGRect(x: selectedStartPositionForCircleSelector, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         }
         return frame
-    }
-    
-    //4 all UI layout based on frames must be called on layoutSubviews
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layer.cornerRadius = roundedControl ? frame.height / 2 : 1.0
-        self.backgroundColor = self.segmentedBackGroundColor
-        self.layer.borderColor = self.segmentedBackGroundColor.cgColor
-        setThumbView()
-        //if fillEqually is not true the layout is not in stackview and its set based on frames
-        guard !fillEqually else { return }
-        for (index, btn) in self.buttons.enumerated() {
-            btn.frame = setFrameForButtonAt(index: index)
-        }
-    }
-    
-    //MARK: Helpers
-    //set frame of thumbview
-    private func setThumbView() {
-        
-        let thumbViewHeight = bounds.height - padding * 2
-        let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : thumbViewHeight
-        let thumbViewPositionX = padding
-        let thumbViewPositionY = (bounds.height - thumbViewHeight) / 2
-        
-        thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
-        thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
-        thumbView.backgroundColor = thumbViewColor
     }
     
     //called if boolean for text is true

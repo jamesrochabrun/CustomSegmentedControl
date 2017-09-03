@@ -76,6 +76,7 @@
                         <outlet property="linearThumbViewSegmentedControl" destination="HAR-Oo-rGb" id="hd3-3e-bOh"/>
                         <outlet property="regularSquareSegmentedControl" destination="hZW-QM-zfW" id="Bne-38-aHp"/>
                         <outlet property="textSegmentedControl" destination="aTQ-Lp-5v7" id="eCV-qK-l3A"/>
+                        <outlet property="textSquareSegmentedControl" destination="HAR-Oo-rGb" id="CBY-sT-AT4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
