@@ -271,9 +271,14 @@ class CustomSegmentedControl: UIControl {
     
     private func setThumbView() {
         
+        //here is all for linear just add a boolean to set the height here 
+        //like     let thumbViewHeight: CGFloat = linearSelector? 5.0 : bounds.height - padding * 2
+        
+        //but figure ot put how to handle it just for square thumbview
+        
         let thumbViewHeight: CGFloat = 5.0// bounds.height - padding * 2
         let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
-        let thumbViewPositionX: CGFloat = 0//padding
+        let thumbViewPositionX = padding
         let thumbViewPositionY = bounds.height - thumbViewHeight
         
         thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
