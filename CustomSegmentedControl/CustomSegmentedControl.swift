@@ -19,22 +19,23 @@ import UIKit
  
  segmentedControl.setSelectorWith(titles: [String])
  itemsWithText = true
- circleSelector = true/false depending on the lenght of text, suggest set to false to give mnore space to text
+ fillEqually = true/false depending on the lenght of text, suggest set to true to give mnore space to text
  
  2 - if selector contains images set:
  
  segmentedControl.setSelectorWith(images: [image])
  itemsWithText = false
- circleSelector = true/false depending on design
+ fillEqually = true/false depending on design
  buttonColorForNormal and buttonColorForSelected
  
  and set the
  
- 3 - if selector contains images that are different set:
+ 3 - if selector contains images that are different and dont want to change its tintColor on selection set:
  
  segmentedControl.setSelectorWith(images: [image])
  itemsWithText = false
  buttonsWithDynamicImages = true
+ Note - do not set itemsWithDynamicColor to true here that will make buttons not show on app
  
  //this will change the image based on the index
  
@@ -42,7 +43,7 @@ import UIKit
  
  segmentedControl.setSelectorWith(colors: [UIColor])
  itemsWithText = false
- circleSelector = true/false depending on design
+ fillEqually = true/false depending on design
  itemsWithDynamicColor = true
  imageForItemWithDynamicColors = image that wil change color
  
@@ -54,12 +55,13 @@ class CustomSegmentedControl: UIControl {
     //Set to 10 by default, if setted to 0 the image will be same size at button
     static let imageInsets: UIEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
     
-    //Private properties
+    //Private UI properties
     fileprivate var buttons = [UIButton]()
     fileprivate var thumbView: UIView = {
         return UIView()
     }()
     
+    //Private datasources
     @IBInspectable private var buttonImages: [UIImage] = [] {
         didSet {
             updateView()
@@ -78,28 +80,17 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    //the buttons cant be smaller than 0.6 or scale bigger that 1.0
-    @IBInspectable public var scaleForButtonsWithCircleSelector: CGFloat {
-        get {
-            return self.privateButtonsScaleForCircleSelector
-        }
-        set {
-            if newValue > 1.0 || newValue < 0.6 {
-                privateButtonsScaleForCircleSelector = 1.0
-            } else {
-                privateButtonsScaleForCircleSelector = newValue
-            }
-        }
-    }
-    
-    private var privateButtonsScaleForCircleSelector: CGFloat = 1.0 {
-        didSet {
-            self.layoutSubviews()
-        }
-    }
-    
     //Public properties customize segmented control
+    //change this public properties for customization
+    
+    //MARK: APPEREANCE
     var selectedSegmentIndex = 0
+
+    @IBInspectable var padding: CGFloat = 0 {
+        didSet {
+            self.updateView()
+        }
+    }
     
     @IBInspectable var customBorderWidth: CGFloat = 0 {
         didSet {
@@ -113,6 +104,8 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
+    //animation duration is 0.3 by default
+    @IBInspectable var animationDuration: CGFloat = 0.3
     //segmented
     @IBInspectable var segmentedBackGroundColor: UIColor = .white {
         didSet {
@@ -127,7 +120,7 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    //If text
+    //MARK: SEGMENTED CONTROL WITH TEXT
     @IBInspectable var textColor: UIColor = .lightGray {
         didSet {
             updateView()
@@ -146,7 +139,8 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    //if images
+    //MARK: SEGMENTED CONTROL WITH IMAGES
+    //if images with change on it's tint color on selection
     @IBInspectable var buttonColorForNormal: UIColor = .lightGray {
         didSet {
             updateView()
@@ -158,47 +152,56 @@ class CustomSegmentedControl: UIControl {
             updateView()
         }
     }
-    
-    //if buttons have dynamicImages means an array of images and wants to display one as selected on selection
-    @IBInspectable var buttonsWithDynamicImages: Bool = false {
-        didSet {
-            updateView()
-        }
-    }
-    
-    //if buttons have dynamic colors
-    @IBInspectable public var itemsWithDynamicColor: Bool = false {
-        didSet {
-            self.updateView()
-        }
-    }
-    
+
+    //MARK: SEGMENTED CONTROL WITH COLORS
+
+    //this is just a placeholder it can be any type of images passed as parameter it will "hold" the color and present it
     @IBInspectable var imageForItemWithDynamicColors: UIImage? {
         didSet {
             updateView()
         }
     }
     
-    @IBInspectable var padding: CGFloat = 0 {
-        didSet {
-            self.updateView()
-        }
-    }
+    //MARK: MAIN BOOLEANS FOR SET UICONTROL
+    //main properties for customize segmented, if items contains text is recommended to set the fillEqually to true
     
-    //main properties for customize segmented, if items contains text is recommended to set the circleSelector to false
-    public var circleSelector: Bool = true {
+    //A) Most important bolleans are fillEqually - itemsWithText - roundedControl
+    public var fillEqually: Bool = false {
         didSet {
             self.layoutSubviews()
         }
     }
     
+    //change the control for images and text
     public var itemsWithText: Bool = false {
         didSet {
             self.updateView()
         }
     }
     
-    //MARK: Update selector with data
+    public var roundedControl: Bool = false {
+        didSet {
+            self.updateView()
+        }
+    }
+    
+    //B) This makes changes on buttons with images and only if itemsWithText = false
+    //if buttons have dynamicImages means if we want to show the image without changing its tintcolor
+    //Setting this to true will make not buttonColorForNormal and buttonColorForSelected not been called
+    @IBInspectable var buttonsWithDynamicImages: Bool = false {
+        didSet {
+            updateView()
+        }
+    }
+    
+    //C) This makes changes on buttons with colors and only if itemsWithText = false
+    @IBInspectable public var itemsWithDynamicColor: Bool = false {
+        didSet {
+            self.updateView()
+        }
+    }
+    
+    //MARK: SELECTOR DATASOURCES
     func setSelectorWith(images: [UIImage]) {
         self.buttonImages = images
     }
@@ -210,6 +213,8 @@ class CustomSegmentedControl: UIControl {
     func setSelectorWith(colors: [UIColor]) {
         self.buttonColors = colors
     }
+    
+    //MARK: METHODS THAT WILL CREATE THE CONTROL BASED ON CUSTOMIZATION OF PROPERTIES
     
     //1 reset all views to clean state
     private func resetViews() {
@@ -228,55 +233,95 @@ class CustomSegmentedControl: UIControl {
         } else {
             itemsWithText ? setButtonsWithText() : setButtonsWithImages()
         }
-        if circleSelector {
-            let _ = self.buttons.map { addSubview($0) }
-        } else {
+        if fillEqually {
             self.layoutButtonsOnStackView()
+        } else {
+            let _ = self.buttons.map { addSubview($0) }
         }
     }
     
-    //3 if selector is not circled layout buttons on stackview
+    //3 if fillEqualy = true
     private func layoutButtonsOnStackView() {
         let sv = UIStackView(arrangedSubviews: buttons)
         sv.axis = .horizontal
         sv.alignment = .fill
+        sv.translatesAutoresizingMaskIntoConstraints = false
         sv.distribution = .fillEqually
         addSubview(sv)
         
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        sv.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        sv.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        sv.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            sv.topAnchor.constraint(equalTo: topAnchor),
+            sv.bottomAnchor.constraint(equalTo: bottomAnchor),
+            sv.trailingAnchor.constraint(equalTo: trailingAnchor),
+            sv.leadingAnchor.constraint(equalTo: leadingAnchor)
+            ])
     }
     
-    //4 layout subviews based on frames
+    //if fillEqually = false
+    private func setFrameForButtonAt(index: Int) -> CGRect {
+        
+        var frame = CGRect.zero
+        
+        //1 identify the height of each button
+        let buttonHeight = (bounds.height - padding * 2)
+        //2 set it's height for circle look and centered position Y
+        let buttonWidth = buttonHeight
+        let selectorPositionY = (bounds.height - buttonHeight) / 2
+        
+        //3 get the delta for scaled buttons
+        let paddingForScale: CGFloat = (thumbView.frame.height - buttonHeight) / 2
+        
+        //set first and last elements origin x
+        let firstelementPositionX = self.padding + paddingForScale
+        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding + paddingForScale
+        
+        //MARK Start here to modify the items from the second until the one befor the last
+        //the area where the selector is contained
+        let selectorAreaTotalWidth = bounds.width / CGFloat(buttons.count)
+        //startingPoint based on x position multiplier
+        let startingPointAtIndex = selectorAreaTotalWidth *  CGFloat(index)
+        //the remaining space of a selectorArea based on selector width
+        let originXForNextItem = (selectorAreaTotalWidth - thumbView.bounds.width) / 2
+        //dynamically change the origin x of the items between 0 and lastItem
+        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem + paddingForScale
+        
+        if index == 0 {
+            
+            frame = CGRect(x: firstelementPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+        } else if index == self.buttons.count - 1 {
+            frame = CGRect(x: lastElemetPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+        } else {
+            frame = CGRect(x: selectedStartPositionForCircleSelector, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
+        }
+        return frame
+    }
+    
+    //4 all UI layout based on frames must be called on layoutSubviews
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = frame.height / 2
+        layer.cornerRadius = roundedControl ? frame.height / 2 : 1.0
         self.backgroundColor = self.segmentedBackGroundColor
         self.layer.borderColor = self.segmentedBackGroundColor.cgColor
         setThumbView()
-        //if circleSelector is true the layout is not in stackview
-        guard circleSelector else { return }
+        //if fillEqually is not true the layout is not in stackview and its set based on frames
+        guard !fillEqually else { return }
         for (index, btn) in self.buttons.enumerated() {
             btn.frame = setFrameForButtonAt(index: index)
         }
     }
     
     //MARK: Helpers
-    //set frame of selector
+    //set frame of thumbview
     private func setThumbView() {
         
-        let selectorHeight = bounds.height - padding * 2
-        let selectorWidth = circleSelector ? selectorHeight : (bounds.width / CGFloat(buttons.count)) - padding * 2
-        let selectorPositionX = padding
-        let selectorPositionY = (bounds.height - selectorHeight) / 2
+        let thumbViewHeight = bounds.height - padding * 2
+        let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : thumbViewHeight
+        let thumbViewPositionX = padding
+        let thumbViewPositionY = (bounds.height - thumbViewHeight) / 2
         
-        thumbView.frame = CGRect(x: selectorPositionX, y: selectorPositionY, width: selectorWidth, height: selectorHeight)
-        
-        thumbView.layer.cornerRadius = selectorHeight / 2
+        thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
+        thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
         thumbView.backgroundColor = thumbViewColor
     }
     
@@ -331,51 +376,17 @@ class CustomSegmentedControl: UIControl {
             buttons.append(button)
         }
     }
-    
-    //MARK set frame for each button if selector is circled
-    private func setFrameForButtonAt(index: Int) -> CGRect {
-        
-        var frame = CGRect.zero
-        
-        //1 identify the height of each button
-        let buttonHeight = (bounds.height - padding * 2) * privateButtonsScaleForCircleSelector
-        //2 set it's height for circle look and centered position Y
-        let buttonWidth = buttonHeight
-        let selectorPositionY = (bounds.height - buttonHeight) / 2
-        
-        //3 get the delta for scaled buttons
-        let paddingForScale: CGFloat = (thumbView.frame.height - buttonHeight) / 2
-        
-        //set first and last elements origin x
-        let firstelementPositionX = self.padding + paddingForScale
-        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding + paddingForScale
-        
-        //MARK Start here to modify the items from the second until the one befor the last
-        //the area where the selector is contained
-        let selectorAreaTotalWidth = bounds.width / CGFloat(buttons.count)
-        //startingPoint based on x position multiplier
-        let startingPointAtIndex = selectorAreaTotalWidth *  CGFloat(index)
-        //the remaining space of a selectorArea based on selector width
-        let originXForNextItem = (selectorAreaTotalWidth - thumbView.bounds.width) / 2
-        //dynamically change the origin x of the items between 0 and lastItem
-        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem + paddingForScale
-        
-        if index == 0 {
-            
-            frame = CGRect(x: firstelementPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
-        } else if index == self.buttons.count - 1 {
-            frame = CGRect(x: lastElemetPositionX, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
-        } else {
-            frame = CGRect(x: selectedStartPositionForCircleSelector, y: selectorPositionY, width: buttonWidth, height: buttonHeight)
-        }
-        return frame
-    }
 }
 
-//MARK: Actions
+//MARK: ACTIONS WHEN ITEM IS SELECTED IT HANDLES: ACTION - APPEREANCE - TRANSLATION
 extension CustomSegmentedControl {
     
-    //MAIN action on button tapped
+    //MARK: MAIN ACTION: .valueChanged
+    private func performAction() {
+        sendActions(for: .valueChanged)
+    }
+    
+    //MARK: CHANGING APPEREANCE OF BUTTON ON TAP
     @objc fileprivate func buttonTapped(button: UIButton) {
         
         for (btnIndex, btn) in self.buttons.enumerated() {
@@ -388,9 +399,8 @@ extension CustomSegmentedControl {
             }
             if btn == button {
                 selectedSegmentIndex = btnIndex
-                circleSelector ? moveCircleSelectorAt(index: btnIndex) : moveSelectorAt(index: btnIndex)
+                fillEqually ?  moveThumbView(at: btnIndex) : moveThumbViewFillEquallyFalse(at: btnIndex)
                 btn.setTitleColor(selectedTextColor, for: .normal)
-                
                 if !itemsWithDynamicColor {
                     if !buttonsWithDynamicImages {
                         btn.tintColor = buttonColorForSelected
@@ -398,20 +408,22 @@ extension CustomSegmentedControl {
                 }
             }
         }
-        sendActions(for: .valueChanged)
+        self.performAction()
     }
     
-    //Movement for selector that its not circle
-    fileprivate func moveSelectorAt(index: Int) {
+    //MARK: TRANSLATION OF THUMBVIEW WITH ANIMATION ON TAP
+    
+    //Movement of thumbview if fillEqually = true
+    fileprivate func moveThumbView(at index: Int) {
         
         let selectedStartPosition = index == 0 ? self.padding : bounds.width / CGFloat(buttons.count) *  CGFloat(index) + self.padding
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: TimeInterval(self.animationDuration), animations: {
             self.thumbView.frame.origin.x = selectedStartPosition
         })
     }
     
-    //Movement for circle selector
-    fileprivate func moveCircleSelectorAt(index: Int) {
+    //Movement of thumbview if fillEqually = false
+    fileprivate func moveThumbViewFillEquallyFalse(at index: Int) {
         
         let firstelementPositionX = self.padding
         let lastElemetPositionX = bounds.width - thumbView.frame.width - padding
@@ -425,7 +437,7 @@ extension CustomSegmentedControl {
         //dynamically change the origin x of the items between 0 and lastItem
         let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: TimeInterval(self.animationDuration), animations: {
             
             if index == 0 {
                 self.thumbView.frame.origin.x = firstelementPositionX
