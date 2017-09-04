@@ -33,28 +33,36 @@
                                 <rect key="frame" x="16" y="70.5" width="343" height="567"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAa-JB-zwY" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="73.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTQ-Lp-5v7" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98.5" width="343" height="74"/>
+                                        <rect key="frame" x="0.0" y="74" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGb-ia-pos" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="197.5" width="343" height="73.5"/>
+                                        <rect key="frame" x="0.0" y="148" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Old-0u-MNR" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="296" width="343" height="73.5"/>
+                                        <rect key="frame" x="0.0" y="222" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-Oo-rGb" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="394.5" width="343" height="74"/>
+                                        <rect key="frame" x="0.0" y="296" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-QM-zfW" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="493.5" width="343" height="73.5"/>
+                                        <rect key="frame" x="0.0" y="370" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-de-Dtd" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="444" width="343" height="49"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-1U-g6b" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="518" width="343" height="49"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -72,11 +80,12 @@
                     <connections>
                         <outlet property="colorsSegmentedControl" destination="qGb-ia-pos" id="k0D-Wl-XEG"/>
                         <outlet property="dynamicImagesSegmentedControl" destination="dAa-JB-zwY" id="ARD-N7-Nab"/>
+                        <outlet property="hiddenThumbViewSegmentedControl" destination="uUe-de-Dtd" id="gLb-mZ-oHW"/>
                         <outlet property="iconsSegmentedControl" destination="Old-0u-MNR" id="uru-gO-NfF"/>
-                        <outlet property="linearThumbViewSegmentedControl" destination="HAR-Oo-rGb" id="hd3-3e-bOh"/>
-                        <outlet property="regularSquareSegmentedControl" destination="hZW-QM-zfW" id="Bne-38-aHp"/>
-                        <outlet property="textSegmentedControl" destination="aTQ-Lp-5v7" id="eCV-qK-l3A"/>
-                        <outlet property="textSquareSegmentedControl" destination="HAR-Oo-rGb" id="CBY-sT-AT4"/>
+                        <outlet property="linearThumbViewSegmentedControl" destination="hZW-QM-zfW" id="EZR-4n-DAe"/>
+                        <outlet property="textSegmentedControl" destination="aTQ-Lp-5v7" id="eZX-bb-FPM"/>
+                        <outlet property="textSquareSegmentedControl" destination="HAR-Oo-rGb" id="Zln-vc-2Ji"/>
+                        <outlet property="youtubeLikeSegmentedControl" destination="uRz-1U-g6b" id="ke4-H9-akO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

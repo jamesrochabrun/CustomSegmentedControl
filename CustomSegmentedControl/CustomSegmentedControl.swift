@@ -54,6 +54,7 @@ class CustomSegmentedControl: UIControl {
     //static properties
     //Set to 10 by default, if setted to 0 the image will be same size at button
     static let imageInsets: UIEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+    static let bottomLineThumbViewHeight: CGFloat = 5.0
     
     //Private UI properties
     fileprivate var buttons = [UIButton]()
@@ -106,6 +107,12 @@ class CustomSegmentedControl: UIControl {
     
     //animation duration is 0.3 by default
     @IBInspectable var animationDuration: CGFloat = 0.3
+    @IBInspectable var thumbViewAlpha: CGFloat = 1.0 {
+        didSet {
+            self.thumbView.alpha = thumbViewAlpha
+        }
+    }
+
     //segmented
     @IBInspectable var segmentedBackGroundColor: UIColor = .white {
         didSet {
@@ -165,7 +172,7 @@ class CustomSegmentedControl: UIControl {
     //MARK: MAIN BOOLEANS FOR SET UICONTROL
     //main properties for customize segmented, if items contains text is recommended to set the fillEqually to true
     
-    //A) Most important bolleans are fillEqually - itemsWithText - roundedControl
+    //A) Most important booleans are fillEqually - itemsWithText - roundedControl - bottomLineThumbView - thumbViewHidden
     public var fillEqually: Bool = false {
         didSet {
             self.layoutSubviews()
@@ -185,6 +192,17 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
+    public var bottomLineThumbView: Bool = false {
+        didSet {
+            self.updateView()
+        }
+    }
+    
+    public var thumbViewHidden: Bool = false {
+        didSet {
+            self.thumbView.isHidden = thumbViewHidden
+        }
+    }
     
     //B) This makes changes on buttons with images and only if itemsWithText = false
     //if buttons have dynamicImages means if we want to show the image without changing its tintcolor
@@ -276,10 +294,10 @@ class CustomSegmentedControl: UIControl {
         
         //but figure ot put how to handle it just for square thumbview
         
-        let thumbViewHeight: CGFloat = 5.0// bounds.height - padding * 2
+        let thumbViewHeight = bottomLineThumbView ? CustomSegmentedControl.bottomLineThumbViewHeight : bounds.height - padding * 2
         let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
         let thumbViewPositionX = padding
-        let thumbViewPositionY = bounds.height - thumbViewHeight
+        let thumbViewPositionY = bottomLineThumbView ? bounds.height - thumbViewHeight - padding : (bounds.height - thumbViewHeight) / 2
         
         thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
         thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
