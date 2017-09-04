@@ -10,9 +10,9 @@ import Foundation
 
 //MARK: Generic viewmodel that accepts an array of T
 //Main responsability is to return the element selected at index
-struct GenericViewModel<T> {
-    
-    private var itemsForSelection: [T]
+struct GenericViewModel<T>: IndexReturnable {
+
+    var itemsForSelection: [T]
     
     init(items: [T]) {
         self.itemsForSelection = items
@@ -27,4 +27,15 @@ struct GenericViewModel<T> {
         self.itemsForSelection = items
     }
 }
+
+//Protocol with associated Type
+protocol IndexReturnable {
+    
+    associatedtype Object
+    var itemsForSelection : [Object] { get set }
+    func getItem(at index: Int) -> Object
+}
+
+
+
 

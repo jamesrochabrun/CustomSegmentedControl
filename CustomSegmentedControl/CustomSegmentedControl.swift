@@ -61,7 +61,7 @@ class CustomSegmentedControl: UIControl {
     fileprivate var thumbView: UIView = {
         return UIView()
     }()
-    
+        
     //Private datasources
     @IBInspectable private var buttonImages: [UIImage] = [] {
         didSet {
