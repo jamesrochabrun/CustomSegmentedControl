@@ -275,25 +275,8 @@ class CustomSegmentedControl: UIControl {
     }
     
     //MARK: THUMBVIEW LAYOUT
-//        private func setThumbView() {
-//    
-//            let thumbViewHeight = bounds.height - padding * 2
-//            let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : thumbViewHeight
-//            let thumbViewPositionX = padding
-//            let thumbViewPositionY = (bounds.height - thumbViewHeight) / 2
-//    
-//            thumbView.frame = CGRect(x: thumbViewPositionX, y: thumbViewPositionY, width: thumbViewWidth, height: thumbViewHeight)
-//            thumbView.layer.cornerRadius = roundedControl ? thumbViewHeight / 2 : 1.0
-//            thumbView.backgroundColor = thumbViewColor
-//        }
-    
     private func setThumbView() {
-        
-        //here is all for linear just add a boolean to set the height here 
-        //like     let thumbViewHeight: CGFloat = linearSelector? 5.0 : bounds.height - padding * 2
-        
-        //but figure ot put how to handle it just for square thumbview
-        
+
         let thumbViewHeight = bottomLineThumbView ? CustomSegmentedControl.bottomLineThumbViewHeight : bounds.height - padding * 2
         let thumbViewWidth = fillEqually ? (bounds.width / CGFloat(buttons.count)) - padding * 2 : bounds.height - padding * 2
         let thumbViewPositionX = padding
@@ -332,14 +315,10 @@ class CustomSegmentedControl: UIControl {
         //2 set it's height for circle/square look and centered position Y
         let buttonWidth = buttonHeight
         let thumbViewPositionY = (bounds.height - buttonHeight) / 2
-        
-        //3 get the delta to align it in the center of the thumbViewArea
-        let paddingXForScale: CGFloat = (thumbView.frame.width - buttonWidth) / 2
-        
+
         //set first and last elements origin x
-        let firstelementPositionX = self.padding + paddingXForScale
-        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding + paddingXForScale
-        
+        let firstelementPositionX = self.padding
+        let lastElemetPositionX = bounds.width - thumbView.frame.width - padding
         //MARK Start here to modify the items from the second until the one before the last
         //the area where the thumbView is contained
         let thumbViewAreaTotalWidth = bounds.width / CGFloat(buttons.count)
@@ -348,15 +327,14 @@ class CustomSegmentedControl: UIControl {
         //the remaining space of a selectorArea based on selector width
         let originXForNextItem = (thumbViewAreaTotalWidth - thumbView.bounds.width) / 2
         //dynamically change the origin x of the items between 0 and lastItem
-        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem + paddingXForScale
+        let selectedStartPositionForNotEquallyFill = startingPointAtIndex + originXForNextItem 
         
         if index == 0 {
-            
             frame = CGRect(x: firstelementPositionX, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         } else if index == self.buttons.count - 1 {
             frame = CGRect(x: lastElemetPositionX, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         } else {
-            frame = CGRect(x: selectedStartPositionForCircleSelector, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
+            frame = CGRect(x: selectedStartPositionForNotEquallyFill, y: thumbViewPositionY, width: buttonWidth, height: buttonHeight)
         }
         return frame
     }
@@ -471,7 +449,7 @@ extension CustomSegmentedControl {
         //the remaining space of a selectorArea based on selector width
         let originXForNextItem = (selectorAreaTotalWidth - thumbView.bounds.width) / 2
         //dynamically change the origin x of the items between 0 and lastItem
-        let selectedStartPositionForCircleSelector = startingPointAtIndex + originXForNextItem
+        let selectedStartPositionForNotEquallyFill = startingPointAtIndex + originXForNextItem
         
         UIView.animate(withDuration: TimeInterval(self.animationDuration), animations: {
             
@@ -480,7 +458,7 @@ extension CustomSegmentedControl {
             } else if index == self.buttons.count - 1 {
                 self.thumbView.frame.origin.x = lastElemetPositionX
             } else {
-                self.thumbView.frame.origin.x = selectedStartPositionForCircleSelector
+                self.thumbView.frame.origin.x = selectedStartPositionForNotEquallyFill
             }
         })
     }

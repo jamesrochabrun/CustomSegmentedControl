@@ -26,7 +26,7 @@ class ViewController: UIViewController {
             let images = DummyDataSource.imageItems()
             dynamicImagesSegmentedControl.setSelectorWith(images: images)
             dynamicImagesSegmentedControl.padding = 2
-            dynamicImagesSegmentedControl.thumbViewColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            dynamicImagesSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
         }
     }
     
