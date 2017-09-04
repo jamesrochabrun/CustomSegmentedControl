@@ -21,5 +21,10 @@ struct GenericViewModel<T> {
     func getItem(at index: Int) -> T {
         return self.itemsForSelection[index]
     }
+    
+    mutating func update(items: [T]) {
+        self.itemsForSelection.removeAll()
+        self.itemsForSelection = items
+    }
 }
 

@@ -64,7 +64,7 @@ class ViewController: UIViewController {
             colorsSegmentedControl.setSelectorWith(colors: colors)
             colorsSegmentedControl.padding = 2
             colorsSegmentedControl.thumbViewColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            colorsSegmentedControl.animationDuration = 0.1
+            colorsSegmentedControl.animationDuration = 0.2
             colorsGenericViewModel = GenericViewModel<UIColor>(items: colors)
   
         }
@@ -104,23 +104,22 @@ class ViewController: UIViewController {
     }
     
     //MARK: 6
-    @IBOutlet weak var linearThumbViewSegmentedControl: CustomSegmentedControl! {
+    @IBOutlet weak var youtubeLikeSegmentedControl: CustomSegmentedControl! {
         didSet {
             
-        linearThumbViewSegmentedControl.itemsWithText = true
-        linearThumbViewSegmentedControl.fillEqually = true
-        linearThumbViewSegmentedControl.bottomLineThumbView = true
-        
-        let strings = DummyDataSource.options()
-        linearThumbViewSegmentedControl.setSelectorWith(titles: strings)
-        linearThumbViewSegmentedControl.padding = 2
-        linearThumbViewSegmentedControl.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        linearThumbViewSegmentedControl.selectedTextColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        linearThumbViewSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
- 
+            youtubeLikeSegmentedControl.itemsWithText = false
+            youtubeLikeSegmentedControl.bottomLineThumbView = true
+            youtubeLikeSegmentedControl.fillEqually = true
+            
+            let icons = DummyDataSource.iconItems()
+            youtubeLikeSegmentedControl.setSelectorWith(images: icons)
+            youtubeLikeSegmentedControl.padding = 2
+            youtubeLikeSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
+            youtubeLikeSegmentedControl.buttonColorForNormal =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            youtubeLikeSegmentedControl.buttonColorForSelected = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
         }
     }
-    
+
     //MARK: 7
     @IBOutlet weak var hiddenThumbViewSegmentedControl: CustomSegmentedControl! {
         
@@ -139,20 +138,20 @@ class ViewController: UIViewController {
     }
     
     //MARK: 8
-    
-    @IBOutlet weak var youtubeLikeSegmentedControl: CustomSegmentedControl! {
+    @IBOutlet weak var linearThumbViewSegmentedControl: CustomSegmentedControl! {
         didSet {
             
-            youtubeLikeSegmentedControl.itemsWithText = false
-            youtubeLikeSegmentedControl.bottomLineThumbView = true
-            youtubeLikeSegmentedControl.fillEqually = true
+            linearThumbViewSegmentedControl.itemsWithText = true
+            linearThumbViewSegmentedControl.fillEqually = true
+            linearThumbViewSegmentedControl.bottomLineThumbView = true
             
-            let icons = DummyDataSource.iconItems()
-            youtubeLikeSegmentedControl.setSelectorWith(images: icons)
-            youtubeLikeSegmentedControl.padding = 2
-            youtubeLikeSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
-            youtubeLikeSegmentedControl.buttonColorForNormal =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-            youtubeLikeSegmentedControl.buttonColorForSelected = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
+            let strings = DummyDataSource.options()
+            linearThumbViewSegmentedControl.setSelectorWith(titles: strings)
+            linearThumbViewSegmentedControl.padding = 2
+            linearThumbViewSegmentedControl.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            linearThumbViewSegmentedControl.selectedTextColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            linearThumbViewSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
+            
         }
     }
     
@@ -161,7 +160,20 @@ class ViewController: UIViewController {
     @IBAction func changeBackGroundColor(_ sender: CustomSegmentedControl) {
         
         let backGroundColor = colorsGenericViewModel?.getItem(at: sender.selectedSegmentIndex)
-        self.view.backgroundColor = backGroundColor
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = backGroundColor
+        }
+    }
+    
+    //MARK: Example of how to use to update the content
+    var update = false
+
+    @IBAction func showExampleOfUpdate(_ sender: UIButton) {
+        update = !update
+
+        let colors = !update ? DummyDataSource.colorItems() : [#colorLiteral(red: 0.3176470588, green: 0.831372549, blue: 0.9098039216, alpha: 1), #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1), #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)]
+        self.colorsSegmentedControl.updateSegmentedWith(items: colors)
+        self.colorsGenericViewModel?.update(items: colors)
     }
 }
 

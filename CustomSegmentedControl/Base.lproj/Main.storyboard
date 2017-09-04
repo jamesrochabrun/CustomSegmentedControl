@@ -55,20 +55,30 @@
                                         <rect key="frame" x="0.0" y="296" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-QM-zfW" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="370" width="343" height="49"/>
-                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-de-Dtd" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="444" width="343" height="49"/>
+                                        <rect key="frame" x="0.0" y="370" width="343" height="49"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-1U-g6b" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="518" width="343" height="49"/>
+                                        <rect key="frame" x="0.0" y="444" width="343" height="49"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-QM-zfW" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="518" width="343" height="49"/>
+                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Onv-ou-vVJ">
+                                <rect key="frame" x="93" y="645" width="195" height="30"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.25490196079999999" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Update Data on Last Control">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showExampleOfUpdate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WL3-Fh-OMv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.31764705882352939" green="0.83137254901960778" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -76,7 +86,9 @@
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="top" secondItem="cF5-ZW-t37" secondAttribute="bottom" constant="30" id="KJj-Hc-Wjg"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZBn-gj-8h7"/>
                             <constraint firstItem="cF5-ZW-t37" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="bd4-HI-kaa"/>
+                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="top" secondItem="FPN-J2-Q46" secondAttribute="bottom" constant="7" id="n7b-ZJ-nBL"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qPu-bc-YJ9"/>
+                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="centerX" secondItem="cF5-ZW-t37" secondAttribute="centerX" id="t18-yp-1wr"/>
                             <constraint firstItem="cF5-ZW-t37" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ydj-vp-eAO"/>
                         </constraints>
                     </view>

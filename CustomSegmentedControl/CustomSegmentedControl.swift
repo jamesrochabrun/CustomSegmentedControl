@@ -233,6 +233,30 @@ class CustomSegmentedControl: UIControl {
         self.buttonColors = colors
     }
     
+    //MARK: GENERIC METHOD FOR UPDATE DATASOURCES
+    
+    func updateSegmentedWith<T>(items: T) {
+        
+        self.buttonTitles.removeAll()
+        self.buttonImages.removeAll()
+        self.buttonColors.removeAll()
+        self.thumbView.alpha = 0
+        
+        self.selectedSegmentIndex = 0
+        if items is [String] {
+            self.buttonTitles = items as! [String]
+        } else if items is [UIImage] {
+            self.buttonImages = items as! [UIImage]
+        } else if items is [UIColor] {
+            self.buttonColors = items as! [UIColor]
+        }
+        UIView.animate(withDuration: 0.4) {
+            self.updateView()
+            self.thumbView.alpha = 1
+        }
+        self.performAction()
+    }
+    
     //MARK: METHODS THAT WILL CREATE THE CONTROL BASED ON CUSTOMIZATION OF PROPERTIES
     
     //1 reset all views to clean state
@@ -342,6 +366,8 @@ class CustomSegmentedControl: UIControl {
     //called if boolean for text is true
     private func setButtonsWithText() {
         
+        guard self.buttonTitles.count != 0 else { return }
+        
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
@@ -350,13 +376,15 @@ class CustomSegmentedControl: UIControl {
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)
             //set the one that we want to show as selected by default
-            buttons[selectedSegmentIndex].setTitleColor(selectedTextColor, for: .normal)
         }
+        buttons[selectedSegmentIndex].setTitleColor(selectedTextColor, for: .normal)
     }
     
     //called if boolean for text is false
     private func setButtonsWithImages() {
         
+        guard self.buttonImages.count != 0 else { return }
+
         for buttonImage in self.buttonImages {
             
             var button: UIButton?
@@ -370,15 +398,16 @@ class CustomSegmentedControl: UIControl {
             button?.imageEdgeInsets = CustomSegmentedControl.imageInsets
             button?.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button!)
-            if !buttonsWithDynamicImages {
-                buttons[selectedSegmentIndex].tintColor = buttonColorForSelected
-            }
+        }
+        if !buttonsWithDynamicImages {
+            buttons[selectedSegmentIndex].tintColor = buttonColorForSelected
         }
     }
     
     //called if boolean for dynamic colors in buttons is true
     private func setButtonsWithDynamicColors() {
         
+        guard self.buttonColors.count != 0 else { return }
         for btnColor in self.buttonColors {
             let button = UIButton(type: .system)
             button.tintColor = btnColor
@@ -396,7 +425,7 @@ class CustomSegmentedControl: UIControl {
 extension CustomSegmentedControl {
     
     //MARK: MAIN ACTION: .valueChanged
-    private func performAction() {
+    fileprivate func performAction() {
         sendActions(for: .valueChanged)
     }
     
@@ -461,21 +490,6 @@ extension CustomSegmentedControl {
                 self.thumbView.frame.origin.x = selectedStartPositionForNotEquallyFill
             }
         })
-    }
-}
-
-//MARK: Generic viewmodel that accepts an array of T
-
-struct KMCustomSegmentedControlViewModel<T> {
-    
-    private var itemsForSelection: [T]
-    
-    init(items: [T]) {
-        self.itemsForSelection = items
-    }
-    
-    func getItem(at index: Int) -> T {
-        return self.itemsForSelection[index]
     }
 }
 
