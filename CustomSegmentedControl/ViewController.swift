@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    //Properties
+    private var colorsGenericViewModel: GenericViewModel<UIColor>?
+    
     //MARK: 1 set this values for a selector where images represent the state of the selection
     @IBOutlet weak var dynamicImagesSegmentedControl: CustomSegmentedControl! {
         didSet {
@@ -37,7 +40,7 @@ class ViewController: UIViewController {
             textSegmentedControl.fillEqually = true
             textSegmentedControl.roundedControl = true
             
-            let strings = ["Classic Paper", "Luxe Paper jkjh"]
+            let strings = DummyDataSource.textItems()
             textSegmentedControl.setSelectorWith(titles: strings)
             textSegmentedControl.padding = 2
             textSegmentedControl.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -55,14 +58,15 @@ class ViewController: UIViewController {
             colorsSegmentedControl.fillEqually = false
             colorsSegmentedControl.roundedControl = true
             
-            let colors: [UIColor] = [#colorLiteral(red: 1, green: 0.5484918952, blue: 0, alpha: 1),  #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)]
+            let colors = DummyDataSource.colorItems()
             colorsSegmentedControl.setSelectorWith(colors: colors)
             colorsSegmentedControl.imageForItemWithDynamicColors = UIImage(named: "vignette")
             colorsSegmentedControl.setSelectorWith(colors: colors)
             colorsSegmentedControl.padding = 2
             colorsSegmentedControl.thumbViewColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             colorsSegmentedControl.animationDuration = 0.1
-           // foilSegmentedControlViewModel = KMCustomSegmentedControlViewModel<FoilColor>(items: foilColors)
+            colorsGenericViewModel = GenericViewModel<UIColor>(items: colors)
+  
         }
     }
     
@@ -74,8 +78,8 @@ class ViewController: UIViewController {
             iconsSegmentedControl.fillEqually = false
             iconsSegmentedControl.roundedControl = true
             
-            let images = [#imageLiteral(resourceName: "home") , #imageLiteral(resourceName: "heart"), #imageLiteral(resourceName: "ink")]
-            iconsSegmentedControl.setSelectorWith(images: images)
+            let icons = DummyDataSource.iconItems()
+            iconsSegmentedControl.setSelectorWith(images: icons)
             iconsSegmentedControl.padding = 2
             iconsSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
             iconsSegmentedControl.buttonColorForNormal = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -90,7 +94,7 @@ class ViewController: UIViewController {
             textSquareSegmentedControl.itemsWithText = true
             textSquareSegmentedControl.fillEqually = true
             
-            let strings = ["Classic Paper", "test"]
+            let strings = DummyDataSource.textItems()
             textSquareSegmentedControl.setSelectorWith(titles: strings)
             textSquareSegmentedControl.padding = 2
             textSquareSegmentedControl.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -107,7 +111,7 @@ class ViewController: UIViewController {
         linearThumbViewSegmentedControl.fillEqually = true
         linearThumbViewSegmentedControl.bottomLineThumbView = true
         
-        let strings = ["Classic Paper", "test"]
+        let strings = DummyDataSource.options()
         linearThumbViewSegmentedControl.setSelectorWith(titles: strings)
         linearThumbViewSegmentedControl.padding = 2
         linearThumbViewSegmentedControl.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -125,7 +129,7 @@ class ViewController: UIViewController {
             hiddenThumbViewSegmentedControl.fillEqually = true
             hiddenThumbViewSegmentedControl.thumbViewHidden = true
             
-            let strings = ["Classic Paper", "test"]
+            let strings = DummyDataSource.textItems()
             hiddenThumbViewSegmentedControl.setSelectorWith(titles: strings)
             hiddenThumbViewSegmentedControl.padding = 2
             hiddenThumbViewSegmentedControl.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -143,37 +147,23 @@ class ViewController: UIViewController {
             youtubeLikeSegmentedControl.bottomLineThumbView = true
             youtubeLikeSegmentedControl.fillEqually = true
             
-            let images = [#imageLiteral(resourceName: "home") , #imageLiteral(resourceName: "heart"), #imageLiteral(resourceName: "ink")]
-            youtubeLikeSegmentedControl.setSelectorWith(images: images)
+            let icons = DummyDataSource.iconItems()
+            youtubeLikeSegmentedControl.setSelectorWith(images: icons)
             youtubeLikeSegmentedControl.padding = 2
             youtubeLikeSegmentedControl.thumbViewColor = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
             youtubeLikeSegmentedControl.buttonColorForNormal =  #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
             youtubeLikeSegmentedControl.buttonColorForSelected = #colorLiteral(red: 0.9411764706, green: 0.2549019608, blue: 0.6274509804, alpha: 1)
         }
     }
+    
+    //MARK: Example of how to use it as an action
+    
+    @IBAction func changeBackGroundColor(_ sender: CustomSegmentedControl) {
+        
+        let backGroundColor = colorsGenericViewModel?.getItem(at: sender.selectedSegmentIndex)
+        self.view.backgroundColor = backGroundColor
+    }
 }
-
-class DummyDataSource {
-    
-    static func colorItems() -> [UIColor] {
-        return [#colorLiteral(red: 1, green: 0.5484918952, blue: 0, alpha: 1),  #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)]
-    }
-    
-    static func iconItems() -> [UIImage] {
-        return  [#imageLiteral(resourceName: "home") , #imageLiteral(resourceName: "heart"), #imageLiteral(resourceName: "ink")]
-    }
-    
-    static func textItems() -> [String] {
-        return ["Option 1", "Option2"]
-    }
-    
-    static func imageItems() -> [UIImage] {
-        return [#imageLiteral(resourceName: "icon25"), #imageLiteral(resourceName: "icon24"), #imageLiteral(resourceName: "icon29"), #imageLiteral(resourceName: "icon19")]
-    }
-    
-}
-
-
 
 
 

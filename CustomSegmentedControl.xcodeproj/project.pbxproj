@@ -16,6 +16,7 @@
 		7BFFF9EA1F5B1D3800D9DEA1 /* CustomSegmentedControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFF9E91F5B1D3800D9DEA1 /* CustomSegmentedControlUITests.swift */; };
 		7BFFF9F81F5B1D5100D9DEA1 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFF9F71F5B1D5100D9DEA1 /* CustomSegmentedControl.swift */; };
 		7BFFF9FD1F5B211200D9DEA1 /* GenericViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFF9FC1F5B211200D9DEA1 /* GenericViewModel.swift */; };
+		7BFFFA001F5DD2DC00D9DEA1 /* DummyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFFF9FF1F5DD2DC00D9DEA1 /* DummyDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7BFFF9EB1F5B1D3800D9DEA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BFFF9F71F5B1D5100D9DEA1 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		7BFFF9FC1F5B211200D9DEA1 /* GenericViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericViewModel.swift; sourceTree = "<group>"; };
+		7BFFF9FF1F5DD2DC00D9DEA1 /* DummyDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				7BFFF9C91F5B1D3800D9DEA1 /* AppDelegate.swift */,
+				7BFFF9FE1F5DD2C400D9DEA1 /* Model */,
 				7BFFF9FB1F5B20F400D9DEA1 /* ViewModel */,
 				7BFFF9FA1F5B1E1D00D9DEA1 /* Controller */,
 				7BFFF9F91F5B1E1000D9DEA1 /* View */,
@@ -153,6 +156,14 @@
 				7BFFF9FC1F5B211200D9DEA1 /* GenericViewModel.swift */,
 			);
 			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7BFFF9FE1F5DD2C400D9DEA1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BFFF9FF1F5DD2DC00D9DEA1 /* DummyDataSource.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 				7BFFF9CA1F5B1D3800D9DEA1 /* AppDelegate.swift in Sources */,
 				7BFFF9FD1F5B211200D9DEA1 /* GenericViewModel.swift in Sources */,
 				7BFFF9F81F5B1D5100D9DEA1 /* CustomSegmentedControl.swift in Sources */,
+				7BFFFA001F5DD2DC00D9DEA1 /* DummyDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

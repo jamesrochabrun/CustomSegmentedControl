@@ -43,6 +43,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGb-ia-pos" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="148" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="changeBackGroundColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="cJG-Cc-wKJ"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Old-0u-MNR" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="222" width="343" height="49"/>
