@@ -28,14 +28,6 @@ struct GenericViewModel<T>: IndexReturnable {
     }
 }
 
-//Protocol with associated Type
-protocol IndexReturnable {
-    
-    associatedtype Object
-    var itemsForSelection : [Object] { get set }
-    func getItem(at index: Int) -> Object
-}
-
 
 
 

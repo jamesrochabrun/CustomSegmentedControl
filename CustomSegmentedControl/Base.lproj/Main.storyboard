@@ -40,39 +40,39 @@
                                         <rect key="frame" x="0.0" y="74" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGb-ia-pos" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Old-0u-MNR" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="148" width="343" height="49"/>
+                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-Oo-rGb" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="222" width="343" height="49"/>
+                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-de-Dtd" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="296" width="343" height="49"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-1U-g6b" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="370" width="343" height="49"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-QM-zfW" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="444" width="343" height="49"/>
+                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGb-ia-pos" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="518" width="343" height="49"/>
                                         <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="changeBackGroundColor:" destination="BYZ-38-t0r" eventType="valueChanged" id="cJG-Cc-wKJ"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Old-0u-MNR" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="222" width="343" height="49"/>
-                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-Oo-rGb" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="296" width="343" height="49"/>
-                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-de-Dtd" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="370" width="343" height="49"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-1U-g6b" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="444" width="343" height="49"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-QM-zfW" customClass="CustomSegmentedControl" customModule="CustomSegmentedControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="518" width="343" height="49"/>
-                                        <color key="backgroundColor" red="0.25490197539999998" green="0.27450981740000002" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Onv-ou-vVJ">
-                                <rect key="frame" x="93" y="645" width="195" height="30"/>
+                                <rect key="frame" x="65" y="645" width="251" height="30"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.25490196079999999" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Update Data on Last Control">
+                                <state key="normal" title="Update colors on segmented control">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>

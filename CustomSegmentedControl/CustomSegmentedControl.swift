@@ -220,21 +220,19 @@ class CustomSegmentedControl: UIControl {
         }
     }
     
-    //MARK: SELECTOR DATASOURCES
-    func setSelectorWith(images: [UIImage]) {
-        self.buttonImages = images
-    }
+    //MARK: SET SEGMENTED CONTROL DATASOURCES
     
-    func setSelectorWith(titles: [String]) {
-        self.buttonTitles = titles
-    }
-    
-    func setSelectorWith(colors: [UIColor]) {
-        self.buttonColors = colors
+    func setSegmentedWith<T>(items: T) {
+        if items is [String] {
+            self.buttonTitles = items as! [String]
+        } else if items is [UIImage] {
+            self.buttonImages = items as! [UIImage]
+        } else if items is [UIColor] {
+            self.buttonColors = items as! [UIColor]
+        }
     }
     
     //MARK: GENERIC METHOD FOR UPDATE DATASOURCES
-    
     func updateSegmentedWith<T>(items: T) {
         
         self.buttonTitles.removeAll()
@@ -243,17 +241,13 @@ class CustomSegmentedControl: UIControl {
         self.thumbView.alpha = 0
         
         self.selectedSegmentIndex = 0
-        if items is [String] {
-            self.buttonTitles = items as! [String]
-        } else if items is [UIImage] {
-            self.buttonImages = items as! [UIImage]
-        } else if items is [UIColor] {
-            self.buttonColors = items as! [UIColor]
-        }
+        self.setSegmentedWith(items: items)
+
         UIView.animate(withDuration: 0.4) {
             self.updateView()
             self.thumbView.alpha = 1
         }
+        //if we want to update the view based on the new selectedSegmentedIndex
         self.performAction()
     }
     
