@@ -183,6 +183,15 @@ class ViewController: UIViewController {
         //NOTE important to update the viewModel also with new items or app will crash because the index could be out of bounds
         self.colorsGenericViewModel?.update(items: colors)
     }
+    
+    @IBAction func updateTextControl(_ sender: UIButton) {
+        update = !update
+        let titles = !update ? DummyDataSource.textItems() : DummyDataSource.options()
+
+        self.linearThumbViewSegmentedControl.updateSegmentedWith(items: titles)
+    
+    }
+    
 }
 
 

@@ -70,25 +70,41 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Onv-ou-vVJ">
-                                <rect key="frame" x="65" y="645" width="251" height="30"/>
+                                <rect key="frame" x="16" y="645" width="130" height="30"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.25490196079999999" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Update colors on segmented control">
+                                <state key="normal" title="Update Colors">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showExampleOfUpdate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WL3-Fh-OMv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUn-6g-8OC">
+                                <rect key="frame" x="229" y="644.5" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.25490196079999999" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="edH-41-3CZ"/>
+                                </constraints>
+                                <state key="normal" title="Update Text">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateTextControl:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w6U-hR-3Pi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.31764705882352939" green="0.83137254901960778" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="leading" secondItem="FPN-J2-Q46" secondAttribute="leading" id="1Pn-OW-vGO"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.85" id="AAw-5V-dkc"/>
+                            <constraint firstItem="MUn-6g-8OC" firstAttribute="leading" secondItem="Onv-ou-vVJ" secondAttribute="trailing" constant="83" id="D06-KA-TzH"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="top" secondItem="cF5-ZW-t37" secondAttribute="bottom" constant="30" id="KJj-Hc-Wjg"/>
+                            <constraint firstItem="MUn-6g-8OC" firstAttribute="trailing" secondItem="FPN-J2-Q46" secondAttribute="trailing" id="Rfb-oo-RPq"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZBn-gj-8h7"/>
                             <constraint firstItem="cF5-ZW-t37" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="bd4-HI-kaa"/>
-                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="top" secondItem="FPN-J2-Q46" secondAttribute="bottom" constant="7" id="n7b-ZJ-nBL"/>
+                            <constraint firstItem="MUn-6g-8OC" firstAttribute="top" secondItem="FPN-J2-Q46" secondAttribute="bottom" constant="7" id="elY-4M-rLN"/>
                             <constraint firstItem="FPN-J2-Q46" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qPu-bc-YJ9"/>
-                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="centerX" secondItem="cF5-ZW-t37" secondAttribute="centerX" id="t18-yp-1wr"/>
+                            <constraint firstItem="Onv-ou-vVJ" firstAttribute="baseline" secondItem="MUn-6g-8OC" secondAttribute="baseline" id="u20-il-Qvz"/>
                             <constraint firstItem="cF5-ZW-t37" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ydj-vp-eAO"/>
                         </constraints>
                     </view>
