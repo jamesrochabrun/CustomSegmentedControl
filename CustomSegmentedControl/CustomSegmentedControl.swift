@@ -53,7 +53,7 @@ class CustomSegmentedControl: UIControl {
     
     //static properties
     //Set to 10 by default, if setted to 0 the image will be same size at button
-    static let imageInsets: UIEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+    static let imageInsets: UIEdgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
     static let bottomLineThumbViewHeight: CGFloat = 5.0
     
     //Private UI properties
